@@ -3,6 +3,7 @@ require 'open-uri'
 require 'nokogiri'
 require 'net/http'
 require 'json'
+require 'httparty'
 
 require_relative "../lib/census_data_importer.rb"
 require_relative "../lib/cli.rb"
