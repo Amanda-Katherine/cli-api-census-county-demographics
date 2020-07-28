@@ -32,6 +32,8 @@ class DataImporter
         "DP03_0074E": num_households_with_SNAP_food_stamp
     }
 
-    
+    def self.get_demographic_data_by_county
+        response = HTTParty.get(@@url).parsed_response
+    end
     
 end
