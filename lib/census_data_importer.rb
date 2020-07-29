@@ -3,39 +3,56 @@ require 'nokogiri'
 require 'httparty'
 require 'net/http'
 require 'json'
+require 'pry'
 
 class DataImporter
     # include HTTParty
     
     @@api_key = "0c47ebad1cc342bbf5eeb2ef26ede29c97ccb260"
 
-    @@url = "https://api.census.gov/data/2018/acs/acs5/profile?get=NAME,DP05_0001E,DP05_0018E,DP03_0062E,DP05_0037E,DP05_0070E,DP05_0038E,DP05_0044E,DP05_0035E,DP04_0110E,DP04_0111E,DP04_0112E,DP04_0113E,DP04_0114E,DP04_0115E,DP03_0074E&for=county:*&in=state:*&key=#{api_key}"
+       #full url: "https://api.census.gov/data/2018/acs/acs5/profile?get=NAME,DP05_0001E,DP05_0018E,DP03_0062E,DP05_0037E,DP05_0070E,DP05_0038E,DP05_0044E,DP05_0035E,DP04_0110E,DP04_0111E,DP04_0112E,DP04_0113E,DP04_0114E,DP04_0115E,DP03_0074E&for=county:*&in=state:*&key=0c47ebad1cc342bbf5eeb2ef26ede29c97ccb260"
 
-    #full url: "https://api.census.gov/data/2018/acs/acs5/profile?get=NAME,DP05_0001E,DP05_0018E,DP03_0062E,DP05_0037E,DP05_0070E,DP05_0038E,DP05_0044E,DP05_0035E,DP04_0110E,DP04_0111E,DP04_0112E,DP04_0113E,DP04_0114E,DP04_0115E,DP03_0074E&for=county:*&in=state:*&key=0c47ebad1cc342bbf5eeb2ef26ede29c97ccb260"
-    
-    @@ variables_hash_2018 = {
-        "NAME": name,
-        "DP05_0001E": population,
-        "DP05_0018E": median_age,
-        "DP03_0062E": median_household_income,
-        "DP05_0037E": white_pop,
-        "DP05_0070E": hisp_latino_pop,
-        "DP05_0038E": black_pop,
-        "DP05_0044E": asian_pop,
-        "DP05_0035E": two_or_more_races_pop,
-        "DP04_0110E": total_num_household_units,
-        "DP04_0111E": less_than_20_percent_income_per_month,
-        "DP04_0112E": btw_20_and_24_9_percent_income_per_month,
-        "DP04_0113E": btw_25_and_29_9_percent_income_per_month,
-        "DP04_0114E": btw_30_and_34_9_percent_income_per_month,
-        "DP04_0115E": 35_pecent_or_more_percent_income_per_month,
-        "DP03_0074E": num_households_with_SNAP_food_stamp
-    }
+    def self.import_list_of_counties_for_cli
+        url = "https://api.census.gov/data/2018/acs/acs5/profile?get=NAME&for=county:*&in=state:*"
 
-    def self.get_demographic_data_by_county
-        response = HTTParty.get(@@url).parsed_response
+        all_counties = HTTParty.get(url).parsed_response
         response = response.delete_at(0)
-        
+        response
     end
-    
+
+    def self.import_county_data_from_api(county = *, state = *)
+        url = "https://api.census.gov/data/2018/acs/acs5/profile?get=NAME,DP05_0001E,DP05_0018E,DP03_0062E,DP05_0037E,DP05_0070E,DP05_0038E,DP05_0044E,DP05_0035E,DP04_0110E,DP04_0111E,DP04_0112E,DP04_0113E,DP04_0114E,DP04_0115E,DP03_0074E&for=county:#{county}&in=state:#{state}&key=#{@@api_key}"
+
+        response = HTTParty.get(url).parsed_response
+        response = response.delete_at(0)
+        response
+    end
+        
+    def self.get_demographic_data_by_county
+        counties = {}
+
+        import_county_data_from_api.each do |county_data|
+            county_hash = {}
+            county_hash = {
+                :name => county_data[0], 
+                :tot_pop => county_data[1],
+                :median_age => county_data[2], 
+                :med_household_income => county_data[3], 
+                :white_pop => county_data[4], 
+                :hisp_lat_pop => county_data[5], 
+                :black_pop => county_data[6], 
+                :asian_pop => county_data[7], 
+                :tot_pop_two_plus_races => county_data[8], 
+                :num_household_units => county_data[9], 
+                :num_units_using_less_than_20_percent_monthly_costs_for_mortgage => county_data[10], 
+                :num_units_using_20_25_percent_monthly_costs_for_mortgage => county_data[11], 
+                :num_units_using_25_30_percent_monthly_costs_for_mortgage => county_data[12], 
+                :num_units_using_30_35_percent_monthly_costs_for_mortgage => county_data[13], 
+                :num_units_using_35_plus_percent_monthly_costs_for_mortgage => county_data[14], 
+                :tot_num_households_with_food_stamps_or_snap_benefits => county_data[15]
+            }
+            counties << county
+        end
+        counties
+    end
 end
