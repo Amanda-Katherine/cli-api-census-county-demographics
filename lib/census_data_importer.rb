@@ -29,9 +29,8 @@ class DataImporter
     end
         
     def self.get_demographic_data_by_county
-        counties = []
-
-        import_county_data_from_api.each do |county_data|
+        
+        import_county_data_from_api.collect do |county_data|
             county_hash = {
                 :name => county_data[0], 
                 :tot_pop => county_data[1],
@@ -52,11 +51,9 @@ class DataImporter
                 :state_num => county_data[16],
                 :county_num => county_data[17]
             }
-            counties << county_hash
         end
-        binding.pry
-        counties
     end
 end
 
 maryland = DataImporter.get_demographic_data_by_county
+binding.pry
