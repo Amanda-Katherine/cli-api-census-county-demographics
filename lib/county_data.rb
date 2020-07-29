@@ -8,7 +8,7 @@ class CountyData
         @@all << self
     end
 
-    def self.create_from_collection(county_array)
+    def self.create_from_collection(counties_array)
         students_array.each {|county_hash| CountyData.new(county_hash)}
     end
 
@@ -18,7 +18,8 @@ class CountyData
 
     def self.find_by_state_name(state_name)
         self.all.find {|state| state.name.split(",")[1] == state_name
-            #will this type of method work? 
+            #will this type of method work? or would I need to do something more similar to this?
+            #state.name.split(",").collect{|w| w.capitalize}.join(" ")
     end
    
     def self.find_by_county_name(county_name)
