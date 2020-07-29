@@ -34,6 +34,8 @@ class DataImporter
 
     def self.get_demographic_data_by_county
         response = HTTParty.get(@@url).parsed_response
+        response = response.delete_at(0)
+        
     end
     
 end
