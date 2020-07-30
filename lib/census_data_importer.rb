@@ -1,9 +1,9 @@
-require 'open-uri'
-require 'nokogiri'
-require 'httparty'
-require 'net/http'
-require 'json'
-require 'pry'
+# require 'open-uri'
+# require 'nokogiri'
+# require 'httparty'
+# require 'net/http'
+# require 'json'
+# require 'pry'
 
 class DataImporter
     # include HTTParty
