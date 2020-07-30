@@ -18,7 +18,7 @@ class CountyData
         @@all 
     end
 
-    def self.find_county_by_state(state_name)
+    def self.find_county_by_state(state_name = nil)
         if state_name != nil
             state_name = state_name.split.collect{|w| w.capitalize}.join(" ")
             self.all.select {|state| state.name.split(", ")[1] == state_name}
