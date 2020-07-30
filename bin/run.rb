@@ -6,4 +6,4 @@ require_relative "../lib/county_data.rb"
 require_relative "../lib/cli.rb"
 
 
-CountyDataController.new.call
+CountyDataController.new.welcome
