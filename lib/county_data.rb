@@ -25,11 +25,13 @@ class CountyData
         self.all.select {|state| state.name.split(", ")[1] == state_name}
     end
    
-    def self.find_by_county_name(county_name)
+    def self.find_by_county_name_all_data(county_name)
         county_name = county_name.split.collect{|w| w.capitalize}.join(" ")
         self.all.select {|county| county.name.split(", ")[0].split(" ").collect{|w| w.capitalize}.join(" ") == county_name}    
     end
-        #if I ask a user directly for their county, and there multiple counties with that name, should I just list the counties and states in the CLI and then have them choose from there? 
+
+    
+     
     
 end #Worcester County, Maryland
 counties_array = [{:name=>"Baltimore city, Rhode Island",

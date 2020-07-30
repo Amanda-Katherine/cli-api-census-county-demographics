@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 
-require_relative "../lib/command_line_interface.rb"
 require_relative "../config/environment.rb"
+require_relative "../lib/census_data_importer.rb"
+require_relative "../lib/county_data.rb"
+require_relative "../lib/cli.rb"
 
 
-CommandLineInterface.new.run
+CountyDataController.new.call

@@ -55,5 +55,5 @@ class DataImporter
     end
 end
 
-maryland = DataImporter.get_demographic_data_by_county
-binding.pry
+# maryland = DataImporter.get_demographic_data_by_county
+# binding.pry
