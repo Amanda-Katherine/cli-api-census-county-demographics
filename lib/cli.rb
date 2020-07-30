@@ -31,8 +31,8 @@ class CountyDataController
     
     def list_counties(state_input)
         if CountyData.find_county_by_state(state_input) != nil
-            if CountyData.list_all_counties_in_one_state(state_input).include?(self)   #question here
-                CountyData.list_all_counties_in_one_state(state_input).sort do |a,b|  #do I need the do to end section or can I take this out? 
+            if CountyData.list_all_county_names_in_one_state(state_input).include?(self)   #question here
+                CountyData.list_all_county_names_in_one_state(state_input).sort do |a,b|  #do I need the do to end section or can I take this out? 
                     a.name <=> b.name
                 end.each_with_index do |county, index|
                     puts "#{index + 1}. #{county.name}"
@@ -51,9 +51,9 @@ class CountyDataController
         puts "   Enter the number of the county from the list above to see that county's data."
         # puts "   Enter 'other' if you would like to look at another state."
         
-        county_input = gets.chomp.to_i
+        county_input = gets.chomp.to_i    #wiln need to join the county name from this selection to the state name that was selected above.  Need to create a new method in county_data.rb to returns the county data for this joined object. 
 
-        if (1..CountyData.list_all_counties_in_one_state(state_input).length).include?(county_input)
+        if (1..CountyData.list_all_county_names_in_one_state(state_input).length).include?(county_input)
             county = 
         end
     end

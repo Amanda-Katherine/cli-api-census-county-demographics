@@ -30,7 +30,11 @@ class CountyData
         self.all.select {|county| county.name.split(", ")[0].split(" ").collect{|w| w.capitalize}.join(" ") == county_name}    
     end 
 
-    def self.list_all_counties_in_one_state(state_name)
+    def self.list_county_data(county_and_state)
+        self.all.select {|full_input| full_input.name == county_and_state}
+    end
+
+    def self.list_all_county_names_in_one_state(state_name)
         self.find_county_by_state(state_name).collect {|county_name| county_name.name}.sort
     end
 
