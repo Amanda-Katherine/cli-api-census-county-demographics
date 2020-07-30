@@ -40,7 +40,7 @@ class CountyData
         self.find_county_by_state(state_name).collect {|county_name| county_name.name}.sort
     end
 
-    def self.list_all_counties_with_same_name(county_name)
-        self.find_by_county_name_all_variables(county_name).collect {|county_name| county_name.name}
-    end
+    # def self.list_all_counties_with_same_name(county_name)
+    #     self.find_by_county_name_all_variables(county_name).collect {|county_name| county_name.name}
+    # end
 end 
