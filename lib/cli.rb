@@ -1,6 +1,8 @@
-class CLI
+class Cli
 
-    #do I need to initialize this class? 
+    def initialize
+        all_county_data = DataImporter.get_demographic_data_by_county
+    end
 
     def run
         self.list_counties_by_state
@@ -12,10 +14,10 @@ class CLI
         #how do I not return anything here, but just have this data accessible in the background of the program?  I guess I don't call it until I need it via another method? 
     end
 
-    def list_counties_by_state(user_state)
+    def list_counties_by_state
         user_state = gets.chomp().capitalize
-        if state = CountyData
-        CountyData.
+        # if state = CountyData
+        # CountyData.
     end
     
 end

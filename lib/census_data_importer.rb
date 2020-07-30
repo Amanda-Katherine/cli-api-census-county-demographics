@@ -21,7 +21,7 @@ class DataImporter
     # end
 
     def self.import_county_data_from_api
-        url = "https://api.census.gov/data/2018/acs/acs5/profile?get=NAME,DP05_0001E,DP05_0018E,DP03_0062E,DP05_0037E,DP05_0070E,DP05_0038E,DP05_0044E,DP05_0035E,DP04_0110E,DP04_0111E,DP04_0112E,DP04_0113E,DP04_0114E,DP04_0115E,DP03_0074E&for=county:*&in=state:24&key=#{@@api_key}"
+        url = "https://api.census.gov/data/2018/acs/acs5/profile?get=NAME,DP05_0001E,DP05_0018E,DP03_0062E,DP05_0037E,DP05_0070E,DP05_0038E,DP05_0044E,DP05_0035E,DP04_0110E,DP04_0111E,DP04_0112E,DP04_0113E,DP04_0114E,DP04_0115E,DP03_0074E&for=county:*&in=state:*&key=#{@@api_key}"
 
         response = HTTParty.get(url).parsed_response
         response.shift
