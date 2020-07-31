@@ -6,16 +6,18 @@ class CountyDataController
     end
 
     def welcome
-        puts "\nWelcome to the US Census County Level Demographic Data Library. The data here is from the 2018 American Community Survey 5 Year Data. There are over 3,000 counties in the United States. You might be thinking, wow that's a lot of counties, but you should also be thinking wow, that's a lot of data! Please be patient while the data is pulled from the API. This can take upwards of 30 seconds. I'm sure you're excited to explore some data, so let's jump in!!"
+        puts "\nWelcome to the US Census County Level Demographic and Housing Data Library. The data here is from the 2018 American Community Survey 5 Year."
+        puts "Did you know there are over 3,000 counties in the United States?" 
+        puts "I'm sure you're excited to explore some data, so let's jump in!!"
         puts " "
-        puts "To exit this program, enter 'exit'"
         self.get_input
     end
 
     def get_input
         state_input = ""
         until state_input == "exit"
-            puts "What state is your county in?"
+            puts "To exit this program, enter 'exit'\n"
+            puts "Please enter the state of the county you would like to look at:"
             state_input = gets.strip.split.collect{|w| w.capitalize}.join(" ")
         
             if state_input != "exit"
