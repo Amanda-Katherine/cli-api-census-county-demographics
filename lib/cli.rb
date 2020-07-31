@@ -20,16 +20,16 @@ class CountyDataController
 
     def get_input(state_input = "")
         
-        until state_input == "exit"
+        until state_input == "Exit"
             puts ""
             puts "Please enter the state of the county you would like to look at or enter 'exit' to leave this program:\n\n"
             
             state_input = gets.strip.split.collect{|w| w.capitalize}.join(" ")
             @state_input = state_input
             
-            if state_input == "exit".strip.downcase
-                puts "Thanks for checking out the County Data Finder."
-            else state_input != "exit".strip.downcase
+            if state_input == "Exit"
+                abort "\nThanks for checking out the County Data Finder. Have a great day!"
+            else 
                 puts ""
                 self.state_is_valid?(state_input) 
             end
@@ -109,8 +109,8 @@ class CountyDataController
         when 'list'
             self.list_counties(@state_input)
         when 'exit'
-            state_input = "exit"
-            self.get_input
+            puts "Thanks for checking out the County Data Finder. Have a great day!"
+            abort
         else
             state_input = post_county_input.split.collect{|w| w.capitalize}.join(" ")
             self.state_is_valid?(state_input)
