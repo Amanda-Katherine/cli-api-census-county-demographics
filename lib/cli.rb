@@ -34,16 +34,17 @@ class CountyDataController
     end
 
     def state_is_valid?(state_input)
-       if CountyData.find_county_by_state(state_input) == [] 
-        puts "\n**************************************************************"
-        CountyData.list_all_states_without_data.each  {|state| puts "#{state}"}
-        puts "\nIt does not appear that your entry was a state's name. Check out the list above for valid options." 
-       
-        self.get_input
-       else
-        self.list_counties(state_input)
-       end
+        if CountyData.find_county_by_state(state_input) == [] 
+            puts "\n**************************************************************"
+
+            CountyData.list_all_states_without_data.each  {|state| puts "#{state}"}
         
+            puts "\nIt does not appear that your entry was a state's name. Check out the list above for valid options." 
+       
+            self.get_input
+       else
+            self.list_counties(state_input)
+       end
     end
 
     def list_counties(state_input)
