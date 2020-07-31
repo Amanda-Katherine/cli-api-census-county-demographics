@@ -47,12 +47,13 @@ class CountyDataController
     end
 
     def list_counties(state_input)
-        CountyData.find_county_by_state(state_input) != nil
-                CountyData.list_all_county_names_in_one_state(state_input).each_with_index do |county, index|
-                    puts "#{index + 1}. #{county}"
-                end # do
-                puts "\n\n"
-                self.select_county_input(state_input)   
+        CountyData.list_all_county_names_in_one_state(state_input).each_with_index do |county, index|
+            puts "#{index + 1}. #{county}"
+        end # do
+        
+        puts "\n\n"
+        
+        self.select_county_input(state_input)   
     end
     
     def select_county_input(state_input)
