@@ -6,47 +6,59 @@ class CountyDataController
     end
 
     def welcome
-        puts "\nWelcome to the US Census County Level Demographic and Housing Data Library. The data here is from the 2018 American Community Survey 5 Year."
-        puts "Did you know there are over 3,000 counties in the United States?" 
-        puts "I'm sure you're excited to explore some data, so let's jump in!!"
-        puts " "
+        puts "\n*********************************************************"
+        puts "\nWelcome to the US Census County Data Finder. The data here is from the 2018 American Community Survey 5 Year and represents a portion of demographic and housing data that the ACS collects."
+        # sleep(3)
+        puts "\nDid you know there are over 3,000 counties in the United States?" 
+        # sleep(3)
+        puts "\nI'm sure you're excited to explore some data, so let's jump in!!"
+        # sleep(2)
+        puts "\n**************************************************************"
         self.get_input
     end
 
-    def get_input
-        state_input = ""
-        until state_input == "exit"
-            puts "To exit this program, enter 'exit'\n"
-            puts "Please enter the state of the county you would like to look at:"
-            state_input = gets.strip.split.collect{|w| w.capitalize}.join(" ")
+    def get_input(state_input = "")
         
-            if state_input != "exit"
-                self.list_counties(state_input)
-            elsif state_input == ""
-                self.get_input
-            else
-                exit
+        until state_input == "exit"
+            puts ""
+            puts "Please enter the state of the county you would like to look at or enter 'exit' to leave this program:\n\n"
+            state_input = gets.strip.split.collect{|w| w.capitalize}.join(" ")
+            @state_input = state_input
+            if state_input == "exit".strip.downcase
+                puts "Thanks for checking out the County Data Finder."
+            else state_input != "exit".strip.downcase
+                puts ""
+                self.state_is_valid?(state_input) 
             end
         end
     end
 
+    def state_is_valid?(state_input)
+       if CountyData.find_county_by_state(state_input) == [] 
+        puts "\n**************************************************************"
+        CountyData.list_all_states_without_data.each  {|state| puts "#{state}"}
+        puts "It does not appear that your entry was a state's name. Check out the list above for valid options." 
+       
+        self.get_input
+       else
+        self.list_counties(state_input)
+       end
+        
+    end
+
     def list_counties(state_input)
         if CountyData.find_county_by_state(state_input) != nil
-            # binding.pry
                 CountyData.list_all_county_names_in_one_state(state_input).each_with_index do |county, index|
                     puts "#{index + 1}. #{county}"
                 end # do
+                puts "\n\n"
                 self.select_county_input(state_input)
         else 
-                puts "It does not appear that your entry was not a state. Please try again." 
-                self.get_input
       
         end    
     end
     
     def select_county_input(state_input)
-        # puts "Which data would you like to look at?"
-        # puts "   Enter 'state' to see every counties data within the state."
         puts "   Enter the number of the county from the list above to see that county's data."
         # puts "   Enter 'other' if you would like to look at another state."
         
@@ -56,10 +68,15 @@ class CountyDataController
             county = CountyData.list_all_county_names_in_one_state(state_input)[county_input - 1]
             county_data = CountyData.list_county_data(county)
             display_data(county_data)
+        else
+            puts ""
+            puts "Whoops. Looks like you didn't select a valid number."
+            self.select_county_input(state_input)
         end
     end
 
     def display_data(county_data)
+        puts "\n**************************************************************************************************************\n"
         puts "County Name: #{county_data.name}"
         puts "Total Population: #{county_data.tot_pop}"
         puts "Median Household Income: #{county_data.med_household_income}"
@@ -75,6 +92,28 @@ class CountyDataController
         puts "Number of Housing Units where the Owner Spends Between 30-34.9% of Monthly Costs on a Mortgage:#{county_data.num_units_using_30_35_percent_monthly_costs_for_mortgage}"
         puts "Number of Housing Units where the Owner Spends More than 35% of Monthly Costs on a Mortgage:#{county_data.num_units_using_35_plus_percent_monthly_costs_for_mortgage}"
         puts "Number of Households Utilizing SNAP and/or Food Stamp Services: #{county_data.tot_num_households_with_food_stamps_or_snap_benefits}"
+        puts "**************************************************************************************************************"
+
+        self.post_county_user_choice
+    end
+
+    def post_county_user_choice
+        puts "If you would like to go back to the #{@state_input} county list, enter 'list'."
+        puts "If you would like to look at a county in another state, enter that state's name."
+        puts "If you would like to go to exit the program, enter 'exit'\n"
+
+        post_county_input = gets.chomp.downcase
+
+        case post_county_input
+        when 'list'
+            self.list_counties(@state_input)
+        when 'exit'
+            state_input = "exit"
+            self.get_input
+        else
+            state_input = post_county_input.split.collect{|w| w.capitalize}.join(" ")
+            self.state_is_valid?(state_input)
+        end
     end
 
     

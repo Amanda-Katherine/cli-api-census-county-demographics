@@ -21,7 +21,8 @@ class CountyData
     def self.find_county_by_state(state_name = nil)
         if state_name != nil
             state_name = state_name.split.collect{|w| w.capitalize}.join(" ")
-            self.all.select {|state| state.name.split(", ")[1] == state_name}
+            # binding.pry
+            self.all.select {|state| state.name.split(", ")[1].split(" ").collect{|w| w.capitalize}.join(" ") == state_name}
         end
     end
    
@@ -30,14 +31,16 @@ class CountyData
         self.all.select {|county| county.name.split(", ")[0].split(" ").collect{|w| w.capitalize}.join(" ") == county_name}    
     end 
 
-    def self.list_county_data(county_name)
-        
+    def self.list_county_data(county_name) 
         CountyData.all.detect{|county_data| county_data.name.downcase == county_name.downcase}
-    
     end
 
     def self.list_all_county_names_in_one_state(state_name)
         self.find_county_by_state(state_name).collect {|county_name| county_name.name}.sort
+    end
+
+    def self.list_all_states_without_data
+        self.all.collect {|state_name| state_name.name.split(", ")[1]}.uniq.sort
     end
 
     # def self.list_all_counties_with_same_name(county_name)
