@@ -14,6 +14,7 @@ class CountyDataController
         puts "\nI'm sure you're excited to explore some data, so let's jump in!!"
         # sleep(2)
         puts "\n**************************************************************"
+        
         self.get_input
     end
 
@@ -22,8 +23,10 @@ class CountyDataController
         until state_input == "exit"
             puts ""
             puts "Please enter the state of the county you would like to look at or enter 'exit' to leave this program:\n\n"
+            
             state_input = gets.strip.split.collect{|w| w.capitalize}.join(" ")
             @state_input = state_input
+            
             if state_input == "exit".strip.downcase
                 puts "Thanks for checking out the County Data Finder."
             else state_input != "exit".strip.downcase
@@ -112,8 +115,5 @@ class CountyDataController
             state_input = post_county_input.split.collect{|w| w.capitalize}.join(" ")
             self.state_is_valid?(state_input)
         end
-    end
-
-    
-    
+    end 
 end
