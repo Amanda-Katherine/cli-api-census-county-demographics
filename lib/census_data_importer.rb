@@ -1,4 +1,3 @@
-
 class DataImporter
     
     @@api_key = "0c47ebad1cc342bbf5eeb2ef26ede29c97ccb260"

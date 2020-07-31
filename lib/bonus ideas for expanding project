@@ -17,8 +17,7 @@
     #     "DP03_0075E": num_households_with_SNAP_food_stamp
     # }
 
-    # @@variables_hash_255
-    3 = {
+    # @@variables_hash_2013 = {
     #     "NAME": name,
     #     "DP05_0001E": population,
     #     "DP05_0017E": median_age,

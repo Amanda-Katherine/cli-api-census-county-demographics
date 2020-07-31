@@ -1,8 +1,4 @@
 require 'pry'
-require 'open-uri'
-require 'nokogiri'
-require 'net/http'
-require 'json'
 require 'httparty'
 require 'colorize'
 

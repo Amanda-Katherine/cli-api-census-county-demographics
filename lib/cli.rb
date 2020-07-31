@@ -18,11 +18,9 @@ class CountyDataController
         self.get_input
     end
 
-    def get_input(state_input = "")
-        
+    def get_input(state_input = "")  
         until state_input == "Exit"
-            puts ""
-            puts "Please enter the state of the county you would like to look at or enter 'exit' to leave this program:\n\n"
+            puts "\nPlease enter the state of the county you would like to look at or enter 'exit' to leave this program:\n\n"
             
             state_input = gets.strip.split.collect{|w| w.capitalize}.join(" ")
             @state_input = state_input
@@ -31,18 +29,18 @@ class CountyDataController
                 abort "\nThanks for checking out the County Data Finder. Have a great day!"
             else 
                 puts ""
-                self.state_is_valid?(state_input) 
+                self.check_state_validity(state_input)
             end
         end
     end
 
-    def state_is_valid?(state_input)
+    def check_state_validity(state_input)
         if CountyData.find_county_by_state(state_input) == [] 
             puts "\n**************************************************************"
 
             CountyData.list_all_states_without_data.each  {|state| puts "#{state}"}
         
-            puts "\nIt does not appear that your entry was a state's name. Check out the list above for valid options." 
+            puts "\nIt does not appear that your entry was valid. Check out the list above for valid options." 
        
             self.get_input
        else
@@ -89,9 +87,9 @@ class CountyDataController
         puts "Total Number of Household Units: #{county_data.num_household_units}"
         puts "Number of Housing Units where the Owner Spends Less than 20% of their Monthly Costs on a Mortgage: #{county_data.num_units_using_less_than_20_percent_monthly_costs_for_mortgage}"
         puts "Number of Housing Units where the Owner Spends Between 20-24.9% of Monthly Costs on a Mortgage: #{county_data.num_units_using_20_25_percent_monthly_costs_for_mortgage}"
-        puts "Number of Housing Units where the Owner Spends Between 25-29.9% of Monthly Costs on a Mortgage:#{county_data.num_units_using_25_30_percent_monthly_costs_for_mortgage}"
-        puts "Number of Housing Units where the Owner Spends Between 30-34.9% of Monthly Costs on a Mortgage:#{county_data.num_units_using_30_35_percent_monthly_costs_for_mortgage}"
-        puts "Number of Housing Units where the Owner Spends More than 35% of Monthly Costs on a Mortgage:#{county_data.num_units_using_35_plus_percent_monthly_costs_for_mortgage}"
+        puts "Number of Housing Units where the Owner Spends Between 25-29.9% of Monthly Costs on a Mortgage: #{county_data.num_units_using_25_30_percent_monthly_costs_for_mortgage}"
+        puts "Number of Housing Units where the Owner Spends Between 30-34.9% of Monthly Costs on a Mortgage: #{county_data.num_units_using_30_35_percent_monthly_costs_for_mortgage}"
+        puts "Number of Housing Units where the Owner Spends More than 35% of Monthly Costs on a Mortgage: #{county_data.num_units_using_35_plus_percent_monthly_costs_for_mortgage}"
         puts "Number of Households Utilizing SNAP and/or Food Stamp Services: #{county_data.tot_num_households_with_food_stamps_or_snap_benefits}"
         puts "**************************************************************************************************************"
 
@@ -109,11 +107,17 @@ class CountyDataController
         when 'list'
             self.list_counties(@state_input)
         when 'exit'
-            puts "Thanks for checking out the County Data Finder. Have a great day!"
-            abort
+            abort "Thanks for checking out the County Data Finder. Have a great day!\n *******************************************"
         else
             state_input = post_county_input.split.collect{|w| w.capitalize}.join(" ")
-            self.state_is_valid?(state_input)
+           
+            if CountyData.find_county_by_state(state_input) != [] 
+                @state_input = state_input
+                self.list_counties(state_input) 
+            else 
+                self.post_county_user_choice
+            end
+
         end
     end 
 end

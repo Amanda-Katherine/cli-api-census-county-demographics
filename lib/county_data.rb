@@ -32,7 +32,7 @@ class CountyData
     end
     
     def self.list_all_states_without_data
-        self.all.collect {|state_name| state_name.name.split(", ")[1]}.uniq.sort
+        self.all.collect {|name_of_state| name_of_state.name.split(", ")[1]}.uniq.sort
     end
     
     # def self.list_all_counties_with_same_name(county_name)
