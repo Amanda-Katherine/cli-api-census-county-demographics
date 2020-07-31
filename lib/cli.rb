@@ -37,7 +37,7 @@ class CountyDataController
        if CountyData.find_county_by_state(state_input) == [] 
         puts "\n**************************************************************"
         CountyData.list_all_states_without_data.each  {|state| puts "#{state}"}
-        puts "It does not appear that your entry was a state's name. Check out the list above for valid options." 
+        puts "\nIt does not appear that your entry was a state's name. Check out the list above for valid options." 
        
         self.get_input
        else
@@ -59,10 +59,9 @@ class CountyDataController
     end
     
     def select_county_input(state_input)
-        puts "   Enter the number of the county from the list above to see that county's data."
-        # puts "   Enter 'other' if you would like to look at another state."
+        puts "Enter the number of the county from the list above to see that county's data."
         
-        county_input = gets.chomp.to_i    #will need to join the county name from this selection to the state name that was selected above.  Need to create a new method in county_data.rb to returns the county data for this joined object. 
+        county_input = gets.chomp.to_i
 
         if (1..CountyData.list_all_county_names_in_one_state(state_input).length).include?(county_input)
             county = CountyData.list_all_county_names_in_one_state(state_input)[county_input - 1]
