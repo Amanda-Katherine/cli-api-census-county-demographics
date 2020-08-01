@@ -6,14 +6,14 @@ class CountyDataController
     end
 
     def welcome
-        puts "\n********************************************************************"
-        puts "\nWelcome to the US Census County Data Finder. The data here is from the 2018 American Community Survey 5 Year and represents a portion of demographic and housing data that the ACS collects."
+        puts "\n*********************************************************************************"
+        puts "\nWelcome to the US Census County Data Finder. \n\nThe data here is from the 2018 American Community Survey 5 Year and represents \na portion of demographic and housing data that the ACS collects."
         sleep(3)
         puts "\nDid you know there are over 3,000 counties in the United States?" 
         sleep(3)
         puts "\nI'm sure you're excited to explore some data, so let's jump in!!"
         sleep(2)
-        puts "\n********************************************************************"
+        puts "\n*********************************************************************************"
         
         self.get_input
     end
@@ -39,7 +39,7 @@ class CountyDataController
         
         if CountyData.find_county_by_state(state_input) == [] 
         #    if CountyData.list_all_states.include?(state_input) 
-                puts "\n**************************************************************"
+                puts "\n*********************************************************************"
 
                 CountyData.list_all_states.each  {|state| puts "#{state}"}
             
