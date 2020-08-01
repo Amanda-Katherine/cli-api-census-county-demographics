@@ -22,6 +22,10 @@ class CountyData
             self.all.select {|state| state.name.split(", ")[1].split(" ").collect{|w| w.capitalize}.join(" ") == state_name}
         end
     end
+
+    def self.list_all_states
+        self.all.collect {|name_of_state| name_of_state.name.split(", ")[1].split(" ").collect{|w| w.capitalize}.join(" ")}.uniq.sort
+    end
    
     def self.list_county_data(county_name) 
         CountyData.all.detect{|county_data| county_data.name.downcase == county_name.downcase}
@@ -31,9 +35,6 @@ class CountyData
         self.find_county_by_state(state_name).collect {|county_name| county_name.name}.sort
     end
     
-    def self.list_all_states_without_data
-        self.all.collect {|name_of_state| name_of_state.name.split(", ")[1]}.uniq.sort
-    end
     
     # def self.list_all_counties_with_same_name(county_name)
     #     self.find_by_county_name_all_variables(county_name).collect {|county_name| county_name.name}

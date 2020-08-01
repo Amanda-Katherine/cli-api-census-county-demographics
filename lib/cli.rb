@@ -8,11 +8,11 @@ class CountyDataController
     def welcome
         puts "\n*********************************************************"
         puts "\nWelcome to the US Census County Data Finder. The data here is from the 2018 American Community Survey 5 Year and represents a portion of demographic and housing data that the ACS collects."
-        # sleep(3)
+        sleep(3)
         puts "\nDid you know there are over 3,000 counties in the United States?" 
-        # sleep(3)
+        sleep(3)
         puts "\nI'm sure you're excited to explore some data, so let's jump in!!"
-        # sleep(2)
+        sleep(2)
         puts "\n**************************************************************"
         
         self.get_input
@@ -35,17 +35,18 @@ class CountyDataController
     end
 
     def check_state_validity(state_input)
-        if CountyData.find_county_by_state(state_input) == [] 
+        
+        if CountyData.list_all_states.none?(state_input) == []
             puts "\n**************************************************************"
 
-            CountyData.list_all_states_without_data.each  {|state| puts "#{state}"}
+            CountyData.list_all_states.each  {|state| puts "#{state}"}
         
             puts "\nIt does not appear that your entry was valid. Check out the list above for valid options." 
        
             self.get_input
-       else
+        else
             self.list_counties(state_input)
-       end
+        end
     end
 
     def list_counties(state_input)
@@ -110,8 +111,9 @@ class CountyDataController
             abort "Thanks for checking out the County Data Finder. Have a great day!\n *******************************************"
         else
             state_input = post_county_input.split.collect{|w| w.capitalize}.join(" ")
-           
-            if CountyData.find_county_by_state(state_input) != [] 
+            
+            if CountyData.list_all_states.any?(state_input)
+
                 @state_input = state_input
                 self.list_counties(state_input) 
             else 
