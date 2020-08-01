@@ -36,14 +36,15 @@ class CountyDataController
 
     def check_state_validity(state_input)
         
-        if CountyData.list_all_states.none?(state_input) == []
-            puts "\n**************************************************************"
+        if CountyData.find_county_by_state(state_input) == [] 
+        #    if CountyData.list_all_states.include?(state_input) 
+                puts "\n**************************************************************"
 
-            CountyData.list_all_states.each  {|state| puts "#{state}"}
+                CountyData.list_all_states.each  {|state| puts "#{state}"}
+            
+                puts "\nIt does not appear that your entry was valid. Check out the list above for valid options." 
         
-            puts "\nIt does not appear that your entry was valid. Check out the list above for valid options." 
-       
-            self.get_input
+                self.get_input
         else
             self.list_counties(state_input)
         end
@@ -78,8 +79,8 @@ class CountyDataController
     def display_data(county_data)
         puts "\n**************************************************************************************************************\n"
         puts "County Name: #{county_data.name}"
-        puts "Total Population: #{county_data.tot_pop}"
         puts "Median Household Income: #{county_data.med_household_income}"
+        puts "Total Population: #{county_data.tot_pop}"
         puts "Total White Population: #{county_data.white_pop}"
         puts "Total Hispanic and Latino Population: #{county_data.hisp_lat_pop}"
         puts "Total Black Population: #{county_data.black_pop}"
