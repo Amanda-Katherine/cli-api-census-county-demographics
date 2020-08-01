@@ -26,7 +26,7 @@ class CountyDataController
             @state_input = state_input
             
             if state_input == "Exit"
-                abort "\nThanks for checking out the County Data Finder. Have a great day!"
+                abort "\n*********************************************************************\n  Thanks for checking out the County Data Finder. Have a great day!\n*********************************************************************"
             else 
                 puts ""
                 self.check_state_validity(state_input)
@@ -109,7 +109,7 @@ class CountyDataController
         when 'list'
             self.list_counties(@state_input)
         when 'exit'
-            abort "Thanks for checking out the County Data Finder. Have a great day!\n *******************************************"
+            abort "\n*********************************************************************\n  Thanks for checking out the County Data Finder. Have a great day!\n*********************************************************************"
         else
             state_input = post_county_input.split.collect{|w| w.capitalize}.join(" ")
             

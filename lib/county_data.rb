@@ -9,7 +9,7 @@ class CountyData
 
     def initialize(county_hash)
         county_hash.each {|k, v| self.send("#{k}=", v)}
-        @@all << self #iterates through each county hash and creates the key/value pairs from the attributes listed above and puts them in the class variable @@all. 
+        @@all << self #iterates through an array of county hashes and sets the keys equal to the values of each key/value pair using the attr_accessors above and adds them to the class variable @@all array. 
     end
 
 
@@ -39,7 +39,7 @@ class CountyData
     end
     
 
-    
+
     ## The below are two additional functioning methods that will add the functionality to look by county name from the start. 
 
     # def self.list_all_counties_with_same_name(county_name)
