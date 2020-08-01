@@ -13,7 +13,7 @@ The user is able to select any county within the US they want to see data from. 
 To run this application in your local environment, do the following:
 
 1. Clone this repository
-2. In your terminal, cd into the directory: `cli-api-census-county-demographics`
+2. In your terminal, cd into the proper directory: `/yourdirectory/cli-api-census-county-demographics`
 3. Run `bundle install`
 4. Run `bin/run` 
     -Note: If that doesn't work or you don't have the right perimssion to run the program, try run `ruby bin/run`
@@ -43,7 +43,7 @@ Selection: Rhode Island
 
 
 Enter the number of the county from the list above to see that county's data.
-5
+Selection: 5
 
 **************************************************************************************************************
 County Name: Washington County, Rhode Island
@@ -66,7 +66,7 @@ Number of Households Utilizing SNAP and/or Food Stamp Services: 3663
 If you would like to go back to the Rhode Island county list, enter 'list'.
 If you would like to look at a county in another state, enter that state's name.
 If you would like to go to exit the program, enter 'exit'
-exit
+Selection: exit
 
 *********************************************************************
   Thanks for checking out the County Data Finder. Have a great day!
