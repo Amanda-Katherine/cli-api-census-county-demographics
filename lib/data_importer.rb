@@ -17,8 +17,8 @@ class DataImporter
         import_county_data_from_api.collect do |county_data|
             county_hash = {
                 :name => county_data[0], 
-                :tot_pop => county_data[1],
                 :median_age => county_data[2], 
+                :tot_pop => county_data[1],
                 :med_household_income => county_data[3], 
                 :white_pop => county_data[4], 
                 :hisp_lat_pop => county_data[5], 
