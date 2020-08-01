@@ -6,14 +6,14 @@ class CountyDataController
     end
 
     def welcome
-        puts "\n*********************************************************"
+        puts "\n********************************************************************"
         puts "\nWelcome to the US Census County Data Finder. The data here is from the 2018 American Community Survey 5 Year and represents a portion of demographic and housing data that the ACS collects."
         sleep(3)
         puts "\nDid you know there are over 3,000 counties in the United States?" 
         sleep(3)
         puts "\nI'm sure you're excited to explore some data, so let's jump in!!"
         sleep(2)
-        puts "\n**************************************************************"
+        puts "\n********************************************************************"
         
         self.get_input
     end
@@ -21,7 +21,8 @@ class CountyDataController
     def get_input(state_input = "")  
         until state_input == "Exit"
             puts "\nPlease enter the state of the county you would like to look at or enter 'exit' to leave this program:\n\n"
-            
+            print "Selection: "
+
             state_input = gets.strip.split.collect{|w| w.capitalize}.join(" ")
             @state_input = state_input
             
@@ -62,7 +63,8 @@ class CountyDataController
     
     def select_county_input(state_input)
         puts "Enter the number of the county from the list above to see that county's data."
-        
+        print "Selection: "
+
         county_input = gets.chomp.to_i
 
         if (1..CountyData.list_all_county_names_in_one_state(state_input).length).include?(county_input)
@@ -99,10 +101,10 @@ class CountyDataController
     end
 
     def post_county_user_choice
-        puts "If you would like to go back to the #{@state_input} county list, enter 'list'."
+        puts "\nIf you would like to go back to the #{@state_input} county list, enter 'list'."
         puts "If you would like to look at a county in another state, enter that state's name."
         puts "If you would like to go to exit the program, enter 'exit'\n"
-
+        print "Selection: "
         post_county_input = gets.chomp.downcase
 
         case post_county_input
@@ -120,7 +122,6 @@ class CountyDataController
             else 
                 self.post_county_user_choice
             end
-
         end
     end 
 end

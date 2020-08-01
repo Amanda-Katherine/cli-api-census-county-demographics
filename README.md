@@ -12,16 +12,16 @@ The user is able to select any county within the US they want to see data from. 
 
 To run this application in your local environment, do the following:
 
-    1. Clone this repository
-    2. In your terminal, cd into the directory: `cli-api-census-county-demographics`
-    3. Run `bundle install`
-    4. Run `bin/run` 
-        -Note: If that doesn't work or you don't have the right perimssion to run the program, try run `ruby bin/run`
+1. Clone this repository
+2. In your terminal, cd into the directory: `cli-api-census-county-demographics`
+3. Run `bundle install`
+4. Run `bin/run` 
+    -Note: If that doesn't work or you don't have the right perimssion to run the program, try run `ruby bin/run`
 
 ## Sample
 
 ```
-*********************************************************
+********************************************************************
 
 Welcome to the US Census County Data Finder. The data here is from the 2018 American Community Survey 5 Year and represents a portion of demographic and housing data that the ACS collects.
 
@@ -29,11 +29,11 @@ Did you know there are over 3,000 counties in the United States?
 
 I'm sure you're excited to explore some data, so let's jump in!!
 
-**************************************************************
+********************************************************************
 
 Please enter the state of the county you would like to look at or enter 'exit' to leave this program:
 
-rhode island
+Selection: Rhode Island
 
 1. Bristol County, Rhode Island
 2. Kent County, Rhode Island
@@ -62,6 +62,7 @@ Number of Housing Units where the Owner Spends Between 30-34.9% of Monthly Costs
 Number of Housing Units where the Owner Spends More than 35% of Monthly Costs on a Mortgage: 5411
 Number of Households Utilizing SNAP and/or Food Stamp Services: 3663
 **************************************************************************************************************
+
 If you would like to go back to the Rhode Island county list, enter 'list'.
 If you would like to look at a county in another state, enter that state's name.
 If you would like to go to exit the program, enter 'exit'
