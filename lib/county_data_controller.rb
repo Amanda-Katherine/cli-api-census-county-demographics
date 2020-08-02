@@ -31,7 +31,8 @@ class CountyDataController
             @state_input = state_input
             
             if state_input == "Exit"
-                abort "\n*********************************************************************\n  Thanks for checking out the County Data Finder. Have a great day!\n*********************************************************************\n\n\n".colorize(:cyan)
+                puts "\e[H\e[2J"
+                abort "\n\n\n\n          *********************************************************************\n            Thanks for checking out the County Data Finder. Have a great day!\n          *********************************************************************\n\n\n\n".colorize(:cyan)
             else 
                 puts ""
                 self.check_state_validity(state_input)
@@ -115,7 +116,8 @@ class CountyDataController
         when 'list'
             self.list_counties(@state_input)
         when 'exit'
-            abort "\n*********************************************************************\n  Thanks for checking out the County Data Finder. Have a great day!\n*********************************************************************\n\n\n".colorize(:cyan)
+            puts "\e[H\e[2J"
+            abort "\n\n\n\n          *********************************************************************\n            Thanks for checking out the County Data Finder. Have a great day!\n          *********************************************************************\n\n\n\n".colorize(:cyan)
         else
             state_input = post_county_input.split.collect{|w| w.capitalize}.join(" ")
             
