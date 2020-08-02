@@ -16,7 +16,7 @@ To run this application in your local environment, do the following:
 2. In your terminal, cd into the proper directory: `/yourdirectory/cli-api-census-county-demographics`
 3. Run `bundle install`
 4. Run `bin/run` 
-- Note: If that doesn't work or you don't have the right perimssion to run the program, try run `ruby bin/run`
+- Note: If that doesn't work or you don't have the right perimssion to run the program, try running `chmod 777` or  `ruby bin/run`
 
 ## Sample
 
