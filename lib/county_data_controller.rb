@@ -12,11 +12,8 @@ class CountyDataController
         puts "*********************************************************************".colorize(:light_black)
         sleep(2)
         puts "\nThe data here are from the 2018 American Community Survey 5 Year \ndata set. It represents a portion of demographic and housing data \nthat the ACS collects."
-        # sleep(1)
         puts "\nDid you know there are over " + "3,000 counties".colorize(:light_cyan) + " in the United States?" 
-        # sleep(1)
-        puts "\nI'm sure you're excited to explore some data, so let's jump in!! 💻"
-        
+        puts "\nI'm sure you're excited to explore some data, so let's jump in!! 💻" 
         puts "\n********************************************************************".colorize(:light_black)
         sleep(2)
         self.get_input
@@ -42,7 +39,7 @@ class CountyDataController
     def check_state_validity(state_input)
         
         if CountyData.find_county_by_state(state_input) == [] 
-                puts "\n\n*********************************************************************".colorize(:light_black)
+                puts "\n*********************************************************************\n".colorize(:light_black)
 
                 CountyData.list_all_states.each  {|state| puts "#{state}"}
             
@@ -55,11 +52,10 @@ class CountyDataController
     end
 
     def list_counties(state_input)
+        puts "\n"
         CountyData.list_all_county_names_in_one_state(state_input).each_with_index do |county, index|
             puts "#{index + 1}. #{county}"
         end 
-        
-        # puts "\n\n"
         
         self.select_county_input(state_input)   
     end
@@ -76,8 +72,7 @@ class CountyDataController
             
             display_data(county_data)
         else
-            puts ""
-            puts "Whoops. Looks like you didn't select a valid number".colorize(:red)
+            puts "\nWhoops. Looks like you didn't select a valid number".colorize(:red)
             self.select_county_input(state_input)
         end
     end
@@ -121,7 +116,6 @@ class CountyDataController
             state_input = post_county_input.split.collect{|w| w.capitalize}.join(" ")
             
             if CountyData.list_all_states.any?(state_input)
-
                 @state_input = state_input
                 self.list_counties(state_input) 
             else 
