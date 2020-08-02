@@ -6,7 +6,7 @@ The user is able to select any county within the US they want to see data from. 
 
 ## Getting Started
 
-    In order to run this program, you will need a private API key from the US Census API.  You can obtain a key here: https://api.census.gov/data/key_signup.html. Once your key is created you will be able to use the US Census API, so head on over https://www.census.gov/data/developers/guidance/api-user-guide.html.
+In order to run this program, you will need a private API key from the US Census API.  You can obtain a key here: https://api.census.gov/data/key_signup.html. Once your key is created you will be able to use the US Census API, so head on over https://www.census.gov/data/developers/guidance/api-user-guide.html.
 
 ### Installation
 
