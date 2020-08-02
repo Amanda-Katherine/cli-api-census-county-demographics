@@ -6,7 +6,7 @@ class CountyDataController
     end
 
     def welcome
-        puts "\e[H\e[2J"
+        system('clear')
         puts "\n*********************************************************************".colorize(:light_black)
         puts "            Welcome to the US Census County Data Finder".colorize(:cyan) 
         puts "*********************************************************************".colorize(:light_black)
@@ -32,7 +32,7 @@ class CountyDataController
             
             if state_input == "Exit"
                 puts "\e[H\e[2J"
-                abort "\n\n\n\n          *********************************************************************\n            Thanks for checking out the County Data Finder. Have a great day!\n          *********************************************************************\n\n\n\n".colorize(:cyan)
+                abort "\n\n\n          *********************************************************************\n".colorize(:light_black) + "            Thanks for checking out the County Data Finder. Have a great day!\n".colorize(:cyan) + "          *********************************************************************\n\n\n\n".colorize(:light_black)
             else 
                 puts ""
                 self.check_state_validity(state_input)
@@ -116,8 +116,8 @@ class CountyDataController
         when 'list'
             self.list_counties(@state_input)
         when 'exit'
-            puts "\e[H\e[2J"
-            abort "\n\n\n\n          *********************************************************************\n            Thanks for checking out the County Data Finder. Have a great day!\n          *********************************************************************\n\n\n\n".colorize(:cyan)
+            system('clear')
+            abort "\n\n\n          *********************************************************************\n".colorize(:light_black) + "            Thanks for checking out the County Data Finder. Have a great day!\n".colorize(:cyan) + "          *********************************************************************\n\n\n\n".colorize(:light_black)
         else
             state_input = post_county_input.split.collect{|w| w.capitalize}.join(" ")
             
