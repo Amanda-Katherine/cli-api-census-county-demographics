@@ -15,9 +15,9 @@ class CountyDataController
         # sleep(1)
         puts "\nDid you know there are over " + "3,000 counties".colorize(:light_cyan) + " in the United States?" 
         # sleep(1)
-        puts "\nI'm sure you're excited to explore some data, so let's jump in!!"
+        puts "\nI'm sure you're excited to explore some data, so let's jump in!! 💻"
         
-        puts "\n*********************************************************************".colorize(:light_black)
+        puts "\n********************************************************************".colorize(:light_black)
         sleep(2)
         self.get_input
     end
@@ -31,10 +31,9 @@ class CountyDataController
             @state_input = state_input
             
             if state_input == "Exit"
-                puts "\e[H\e[2J"
-                abort "\n\n\n          *********************************************************************\n".colorize(:light_black) + "            Thanks for checking out the County Data Finder. Have a great day!\n".colorize(:cyan) + "          *********************************************************************\n\n\n\n".colorize(:light_black)
+                system('clear')
+                abort "\n\n\n          *********************************************************************\n".colorize(:light_black) + "          Thanks for checking out the County Data Finder. Have a great day! 😊\n".colorize(:cyan) + "          *********************************************************************\n\n\n\n".colorize(:light_black)
             else 
-                puts ""
                 self.check_state_validity(state_input)
             end
         end
@@ -43,12 +42,11 @@ class CountyDataController
     def check_state_validity(state_input)
         
         if CountyData.find_county_by_state(state_input) == [] 
-        #    if CountyData.list_all_states.include?(state_input) 
-                puts "\n*********************************************************************".colorize(:light_black)
+                puts "\n\n*********************************************************************".colorize(:light_black)
 
                 CountyData.list_all_states.each  {|state| puts "#{state}"}
             
-                puts "\nIt does not appear that your entry was valid. Check out the list above for valid options." 
+                puts "\nIt does not appear that your entry was valid. Check out the list above for valid options.".colorize(:red) 
         
                 self.get_input
         else
@@ -59,15 +57,15 @@ class CountyDataController
     def list_counties(state_input)
         CountyData.list_all_county_names_in_one_state(state_input).each_with_index do |county, index|
             puts "#{index + 1}. #{county}"
-        end # do
+        end 
         
-        puts "\n\n"
+        # puts "\n\n"
         
         self.select_county_input(state_input)   
     end
     
     def select_county_input(state_input)
-        puts "Enter the " + "number".colorize(:cyan) + " of the county from the list above to see that county's data."
+        puts "\n\nEnter the " + "number".colorize(:cyan) + " of the county from the list above to see that county's data."
         print "Selection: "
 
         county_input = gets.chomp.to_i
@@ -75,10 +73,11 @@ class CountyDataController
         if (1..CountyData.list_all_county_names_in_one_state(state_input).length).include?(county_input)
             county = CountyData.list_all_county_names_in_one_state(state_input)[county_input - 1]
             county_data = CountyData.list_county_data(county)
+            
             display_data(county_data)
         else
             puts ""
-            puts "Whoops. Looks like you didn't select a valid number".colorize(:light_red)
+            puts "Whoops. Looks like you didn't select a valid number".colorize(:red)
             self.select_county_input(state_input)
         end
     end
@@ -100,7 +99,7 @@ class CountyDataController
         puts "Number of Housing Units where the Owner Spends Between 30-34.9% of Monthly Costs on a Mortgage:".colorize(:light_cyan) + " #{county_data.num_units_using_30_35_percent_monthly_costs_for_mortgage}"
         puts "Number of Housing Units where the Owner Spends More than 35% of Monthly Costs on a Mortgage:".colorize(:light_cyan) + " #{county_data.num_units_using_35_plus_percent_monthly_costs_for_mortgage}"
         puts "Number of Households Utilizing SNAP and/or Food Stamp Services:".colorize(:light_cyan) + " #{county_data.tot_num_households_with_food_stamps_or_snap_benefits}"
-        puts "**************************************************************************************************************".colorize(:light_black)
+        puts "\n**************************************************************************************************************".colorize(:light_black)
 
         self.post_county_user_choice
     end
@@ -117,7 +116,7 @@ class CountyDataController
             self.list_counties(@state_input)
         when 'exit'
             system('clear')
-            abort "\n\n\n          *********************************************************************\n".colorize(:light_black) + "            Thanks for checking out the County Data Finder. Have a great day!\n".colorize(:cyan) + "          *********************************************************************\n\n\n\n".colorize(:light_black)
+            abort "\n\n\n          *********************************************************************\n".colorize(:light_black) + "          Thanks for checking out the County Data Finder. Have a great day! 😊\n".colorize(:cyan) + "          *********************************************************************\n\n\n\n".colorize(:light_black)
         else
             state_input = post_county_input.split.collect{|w| w.capitalize}.join(" ")
             
