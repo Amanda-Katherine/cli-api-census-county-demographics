@@ -8,7 +8,7 @@ class CountyData
     end
 
     def initialize(county_hash)
-        county_hash.each {|k, v| self.send("#{k}=", v)}
+        county_hash.each {|attribute_name, attribute_value| self.send("#{attribute_name}=", attribute_value)}
         @@all << self #iterates through an array of county hashes and sets the keys equal to the values of each key/value pair using the attr_accessors above and adds them to the class variable @@all array. 
     end
 
