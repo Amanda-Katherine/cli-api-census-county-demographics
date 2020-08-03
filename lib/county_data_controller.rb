@@ -1,5 +1,5 @@
 class CountyDataController
-
+    
     def initialize
         counties_array = DataImporter.get_demographic_data_by_county
         CountyData.create_from_collection(counties_array)

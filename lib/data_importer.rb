@@ -12,8 +12,7 @@ class DataImporter
         response
     end
         
-    def self.get_demographic_data_by_county
-        
+    def self.get_demographic_data_by_county  
         import_county_data_from_api.collect do |county_data|
             county_hash = {
                 :name => county_data[0], 
